@@ -1,8 +1,10 @@
 #ifndef _MONTY_H
 #define _MONTY_H
+#include <unistd.h>
+#include <errno.h>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "monty.h"
 
 /**
