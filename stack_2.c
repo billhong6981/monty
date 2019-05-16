@@ -27,6 +27,7 @@ size_t dlistint_len(stack_t **h)
  * swap_op - a function swaps the top two Node value in the stack
  * @h: points to head
  * @l: line
+ * @fd: file stream
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
 char *swap_op(stack_t **h, unsigned int l, FILE *fd)
@@ -55,6 +56,7 @@ char *swap_op(stack_t **h, unsigned int l, FILE *fd)
  * add_op - a function adds the top two Node value in the stack
  * @h: points to head
  * @l: line
+ * @fd: file stream
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
 char *add_op(stack_t **h, unsigned int l, FILE *fd)
@@ -106,6 +108,7 @@ void free_dlistint(stack_t *head)
  * nop_op - a function does nothing
  * @h: points to head
  * @l: line
+ * @fd: file stream
  * Return: always return NULL
  */
 char *nop_op(__attribute__((unused))stack_t **h, unsigned int l, FILE *fd)

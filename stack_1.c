@@ -3,7 +3,7 @@
  * add_dnodeint - a function adds new node from the head of linked list
  * @head: double pointer of the head
  * @n: integer
- *
+ * @fd: file stream
  * Return: return new node address on success, NULL if fail
  */
 
@@ -33,6 +33,7 @@ stack_t *add_dnodeint(stack_t **head, int n, FILE *fd)
  * push_op - a function pushes value to doubly linked list
  * @h: point to head
  * @l: line
+ * @fd: file stream
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
 
@@ -74,6 +75,7 @@ char *push_op(stack_t **h, unsigned int l, FILE *fd)
  * pall_op - a function prints a value in doubly linked list
  * @h: point to head
  * @l: line
+ * @fd: file stream
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
 char *pall_op(stack_t **h, __attribute__((unused)) unsigned int l, FILE *fd)
@@ -96,6 +98,7 @@ char *pall_op(stack_t **h, __attribute__((unused)) unsigned int l, FILE *fd)
  * pint_op - a function prints the value at the top of stack
  * @h: point to head
  * @l: line
+ * @fd: file stream
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
 char *pint_op(stack_t **h, unsigned int l, FILE *fd)
@@ -119,6 +122,7 @@ char *pint_op(stack_t **h, unsigned int l, FILE *fd)
  * pop_op - a function pops the value at the top of stack
  * @h: point to head
  * @l: line
+ * @fd: file stream
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
 char *pop_op(stack_t **h, unsigned int l, FILE *fd)
