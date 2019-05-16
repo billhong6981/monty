@@ -50,3 +50,20 @@ FILE *open_file(char *file_name)
 	}
 	return (fd1);
 }
+
+/**
+ * unknown_op - a function exits with failure status
+ * @line_n: line number
+ * @cmd: op instruction
+ * @head: points to head
+ * @fd: file descripter
+ * Return: void
+ */
+void unknown_op(unsigned int line_n, char *cmd, stack_t *head, FILE *fd)
+{
+	fprintf(stderr, "L%d: unknown instr %s\n", line_n, cmd);
+	if (head)
+		free_dlistint(head);
+	fclose(fd);
+	exit(EXIT_FAILURE);
+}

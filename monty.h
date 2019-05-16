@@ -58,5 +58,10 @@ void free_dlistint(stack_t *head);
 char *add_op(stack_t **h, unsigned int l);
 char *nop_op(stack_t **h, unsigned int l);
 FILE *open_file(char *file_name);
+char *sub_op(stack_t **h, unsigned int l);
+void unknown_op(unsigned int line_n, char *cmd, stack_t *head, FILE *fd);
+char *div_op(stack_t **h, unsigned int l);
+char *mul_op(stack_t **h, unsigned int l);
+char *mod_op(stack_t **h, unsigned int l);
 
 #endif /* _MONTY_H */

@@ -38,13 +38,7 @@ int main(int argc, char **argv)
 		if (found_opcode != NULL)
 			found_opcode(&head, line_n);
 		else
-		{
-			fprintf(stderr, "L%d: unknown instr %s\n", line_n, cmd);
-			if (head)
-				free_dlistint(head);
-			fclose(fd);
-			exit(EXIT_FAILURE);
-		}
+			unknown_op(line_n, cmd, head, fd);
 	}
 	if (head)
 		free_dlistint(head);

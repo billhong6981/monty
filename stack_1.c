@@ -45,6 +45,8 @@ char *push_op(stack_t **h, unsigned int l)
 	if (!token)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", l);
+		if (*h)
+			free_dlistint(*h);
 		exit(EXIT_FAILURE);
 	}
 	while (token[j] != '\0')
@@ -98,6 +100,8 @@ char *pint_op(stack_t **h, unsigned int l)
 	if (current == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", l);
+		if (*h)
+			free_dlistint(*h);
 		exit(EXIT_FAILURE);
 	}
 	fprintf(stdout, "%d\n", current->n);
@@ -118,6 +122,8 @@ char *pop_op(stack_t **h, unsigned int l)
 	if (current == NULL)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", l);
+		if (*h)
+			free_dlistint(*h);
 		exit(EXIT_FAILURE);
 	}
 	*h = current->next;

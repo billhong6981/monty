@@ -40,6 +40,8 @@ char *swap_op(stack_t **h, unsigned int l)
 	if (i < 2)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", l);
+		if (*h)
+			free_dlistint(*h);
 		exit(EXIT_FAILURE);
 	}
 	temp = current->n;
@@ -64,6 +66,8 @@ char *add_op(stack_t **h, unsigned int l)
 	if (i < 2)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", l);
+		if (*h)
+			free_dlistint(*h);
 		exit(EXIT_FAILURE);
 	}
 	current->next->n += current->n;
