@@ -15,6 +15,7 @@ ssize_t _get_line(char **lineptr, size_t *n, FILE *stream)
 	if ((*lineptr) == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		fclose(stream);
 		exit(EXIT_FAILURE);
 	}
 	while (1)
@@ -33,6 +34,7 @@ ssize_t _get_line(char **lineptr, size_t *n, FILE *stream)
 		if ((*lineptr) == NULL)
 		{
 			fprintf(stderr, "Error: malloc failed\n");
+			fclose(stream);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -83,11 +85,11 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 char *trun_space(char *str)
 {
 	char *str1;
-	static char buffer[1200];
+	static char buffer[2200];
 	int len;
 	int flag = 0;
 
-	str1 = &buffer[1199];
+	str1 = &buffer[2199];
 	*str1 = '\0';
 	len = _strlen(str);
 	while (len)
@@ -111,7 +113,8 @@ char *trun_space(char *str)
 			*(--str1) = str[len];
 		}
 	}
-	return ((flag == 0) ? (NULL) : (str1));
+	free(str);
+	return ((flag == 0 || str1[0] == '#') ? (NULL) : (str1));
 }
 
 /**
@@ -140,9 +143,9 @@ int _strlen(char *s)
 char *read_line(char *s)
 {
 	int i;
-	static char array[200];
+	static char array[500];
 
-	for (i = 0; s[i] != ' ' && s[i] != '\0' && i != 199; i++)
+	for (i = 0; s[i] != ' ' && s[i] != '\0' && i != 499; i++)
 		array[i] = s[i];
 	array[i] = '\0';
 	return (array);

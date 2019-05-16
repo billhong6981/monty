@@ -33,7 +33,6 @@ int main(int argc, char **argv)
 		if (global_line == NULL)
 			continue;
 		cmd = read_line(global_line);
-		free(line);
 		found_opcode = get_opcode_fn(cmd);
 		if (found_opcode != NULL)
 			found_opcode(&head, line_n);
