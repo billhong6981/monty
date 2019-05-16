@@ -89,11 +89,11 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 char *trun_space(char *str)
 {
 	char *str1;
-	static char buffer[2200];
+	static char buffer[5000];
 	int len;
 	int flag = 0;
 
-	str1 = &buffer[2199];
+	str1 = &buffer[4999];
 	*str1 = '\0';
 	len = _strlen(str);
 	while (len)

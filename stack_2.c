@@ -68,7 +68,7 @@ char *add_op(stack_t **h, unsigned int l, FILE *fd)
 	i = dlistint_len(h);
 	if (i < 2)
 	{
-		fprintf(stderr, "L%d: can't swap, stack too short\n", l);
+		fprintf(stderr, "L%d: can't add, stack too short\n", l);
 		if (*h)
 			free_dlistint(*h);
 		fclose(fd);
@@ -76,12 +76,8 @@ char *add_op(stack_t **h, unsigned int l, FILE *fd)
 	}
 	current->next->n += current->n;
 	*h = current->next;
-	if (*h)
-	{
-		current->next->prev = NULL;
-	}
-	if (i == 2)
-		(*h)->next = NULL;
+	current->next->prev = NULL;
+	(*h)->next = NULL;
 	free(current);
 	return (NULL);
 }

@@ -132,7 +132,7 @@ char *pop_op(stack_t **h, unsigned int l, FILE *fd)
 	current = *h;
 	if (current == NULL)
 	{
-		fprintf(stderr, "L%d: can't pint, stack empty\n", l);
+		fprintf(stderr, "L%d: can't pop an empty stack\n", l);
 		if (*h)
 			free_dlistint(*h);
 		fclose(fd);

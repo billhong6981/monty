@@ -61,7 +61,8 @@ FILE *open_file(char *file_name)
  */
 void unknown_op(unsigned int line_n, char *cmd, stack_t *head, FILE *fd)
 {
-	fprintf(stderr, "L%d: unknown instr %s\n", line_n, cmd);
+	char *s = "unknown instruction";
+	fprintf(stderr, "L%d: %s %s\n", line_n, s, cmd);
 	if (head)
 		free_dlistint(head);
 	fclose(fd);
