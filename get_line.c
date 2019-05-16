@@ -8,20 +8,20 @@
  */
 ssize_t _get_line(char **lineptr, size_t *n, FILE *stream)
 {
-	size_t maxchar = 1024, i = 0;
+	unsigned int maxchar = 1024, i = 0;
 	int c;
 
 	(*lineptr) = malloc(maxchar * sizeof(char));
 	if ((*lineptr) == NULL)
-		return (*n = -1);
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	while (1)
 	{
 		c = fgetc(stream);
 		if (c == EOF)
-		{
-			free(*lineptr);
 			return (*n = -1);
-		}
 		if ((i >= maxchar - 2) || c == '\n')
 			break;
 		(*lineptr)[i++] = c;
@@ -31,7 +31,10 @@ ssize_t _get_line(char **lineptr, size_t *n, FILE *stream)
 		maxchar += maxchar;
 		(*lineptr) = _realloc((*lineptr), i, maxchar);
 		if ((*lineptr) == NULL)
-			return (*n = -1);
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			exit(EXIT_FAILURE);
+		}
 	}
 	else
 	{
@@ -80,13 +83,13 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 char *trun_space(char *str)
 {
 	char *str1;
-	static char buffer[1000];
+	static char buffer[1200];
 	int len;
 	int flag = 0;
 
-	str1 = &buffer[999];
+	str1 = &buffer[1199];
 	*str1 = '\0';
-	len = strlen(str);
+	len = _strlen(str);
 	while (len)
 	{
 		--len;
@@ -109,4 +112,38 @@ char *trun_space(char *str)
 		}
 	}
 	return ((flag == 0) ? (NULL) : (str1));
+}
+
+/**
+ *_strlen - a function that returns the length of a string
+ *@s: a pointer point to string
+ *
+ *Return: return a int number of the length of the string
+ */
+
+int _strlen(char *s)
+{
+	int i = 0;
+
+	if (s == NULL)
+		return (0);
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+/**
+ * read_line - a function gets the opcode from the line
+ * @s: line
+ * Return: return the opcode string
+ */
+char *read_line(char *s)
+{
+	int i;
+	static char array[200];
+
+	for (i = 0; s[i] != ' ' && s[i] != '\0' && i != 199; i++)
+		array[i] = s[i];
+	array[i] = '\0';
+	return (array);
 }

@@ -6,7 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "monty.h"
-
+extern char *global_line;   /* Declaration the global variable */
+char *global_line;
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -34,16 +35,28 @@ typedef struct stack_s
 typedef struct instruction_s
 {
         char *opcode;
-        char *(*f)(stack_t **stack, unsigned int line_number, int i);
+        char *(*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /* The following are prototypes */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 ssize_t _get_line(char **lineptr, size_t *n, FILE *stream);
 char *trun_space(char *str);
+char *(*get_opcode_fn(char *s))(stack_t **, unsigned int);
 int _atoi(char *s);
 int _strlen(char *s);
-char *read_line(char *s, int *d);
-
+char *read_line(char *s);
+int _strcmp(char *s1, char *s2);
+char *push_op(stack_t **h, unsigned int l);
+char *pall_op(stack_t **h, unsigned int l);
+stack_t *add_dnodeint(stack_t **head, int n);
+char *pint_op(stack_t **h, unsigned int l);
+char *pop_op(stack_t **h, unsigned int l);
+char *swap_op(stack_t **h, unsigned int l);
+size_t dlistint_len(stack_t **h);
+void free_dlistint(stack_t *head);
+char *add_op(stack_t **h, unsigned int l);
+char *nop_op(stack_t **h, unsigned int l);
+FILE *open_file(char *file_name);
 
 #endif /* _MONTY_H */
