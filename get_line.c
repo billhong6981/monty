@@ -6,7 +6,7 @@
  * @stream: the file that is being read from
  * Return: *n -1 if lineptr is NULL, or n = i
  */
-ssize_t _get_line(char **lineptr, size_t *n, FILE *stream)
+ssize_t _get_line(char **lineptr, size_t *n, FILE *stream, stack_t *head)
 {
 	unsigned int maxchar = 1024, i = 0;
 	int c;
@@ -16,6 +16,8 @@ ssize_t _get_line(char **lineptr, size_t *n, FILE *stream)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		fclose(stream);
+		if (!head)
+			free_dlistint(head);
 		exit(EXIT_FAILURE);
 	}
 	while (1)
@@ -35,6 +37,8 @@ ssize_t _get_line(char **lineptr, size_t *n, FILE *stream)
 		{
 			fprintf(stderr, "Error: malloc failed\n");
 			fclose(stream);
+			if (!head)
+				free_dlistint(head);
 			exit(EXIT_FAILURE);
 		}
 	}

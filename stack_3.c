@@ -5,7 +5,7 @@
  * @l: line
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
-char *sub_op(stack_t **h, unsigned int l)
+char *sub_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	size_t i;
 	stack_t *current;
@@ -17,6 +17,7 @@ char *sub_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: can't sub, stack too short\n", l);
 		if (current)
 			free_dlistint(current);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	current->next->n -= current->n;
@@ -32,7 +33,7 @@ char *sub_op(stack_t **h, unsigned int l)
  * @l: line
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
-char *div_op(stack_t **h, unsigned int l)
+char *div_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	size_t i;
 	stack_t *current;
@@ -44,6 +45,7 @@ char *div_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: can't div, stack too short\n", l);
 		if (current)
 			free_dlistint(current);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	if (current->n == 0)
@@ -51,6 +53,7 @@ char *div_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: division by zero\n", l);
 		if (current)
 			free_dlistint(current);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	current->next->n /= current->n;
@@ -66,7 +69,7 @@ char *div_op(stack_t **h, unsigned int l)
  * @l: line
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
-char *mul_op(stack_t **h, unsigned int l)
+char *mul_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	size_t i;
 	stack_t *current;
@@ -78,6 +81,7 @@ char *mul_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: can't mul, stack too short\n", l);
 		if (current)
 			free_dlistint(current);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	current->next->n *= current->n;
@@ -93,7 +97,7 @@ char *mul_op(stack_t **h, unsigned int l)
  * @l: line
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
-char *mod_op(stack_t **h, unsigned int l)
+char *mod_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	size_t i;
 	stack_t *current;
@@ -105,6 +109,7 @@ char *mod_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: can't mod, stack too short\n", l);
 		if (current)
 			free_dlistint(current);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	if (current->n == 0)
@@ -112,6 +117,7 @@ char *mod_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: division by zero\n", l);
 		if (current)
 			free_dlistint(current);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	current->next->n %= current->n;

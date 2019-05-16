@@ -21,7 +21,7 @@ int _strcmp(char *s1, char *s2)
  * @s: a opcode string
  * Return: return a function pointer if found, otherwise NULL
  */
-char *(*get_opcode_fn(char *s))(stack_t **, unsigned int)
+char *(*get_opcode_fn(char *s))(stack_t **, unsigned int, FILE *fd)
 {
 	int i;
 	instruction_t opcode_fn[] = {

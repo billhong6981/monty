@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 	stack_t *head = NULL;
 	size_t len;
 	unsigned int line_n = 0;
-	char *(*found_opcode)(stack_t **, unsigned int);
+	char *(*found_opcode)(stack_t **, unsigned int, FILE *);
 
 	if (argc != 2)
 	{
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	fd = open_file(argv[1]);
 	while (1)
 	{
-		if ((_get_line(&line, &len, fd)) == -1)
+		if ((_get_line(&line, &len, fd, head)) == -1)
 		{
 			if (line)
 				free(line);
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 		cmd = read_line(global_line);
 		found_opcode = get_opcode_fn(cmd);
 		if (found_opcode != NULL)
-			found_opcode(&head, line_n);
+			found_opcode(&head, line_n, fd);
 		else
 			unknown_op(line_n, cmd, head, fd);
 	}

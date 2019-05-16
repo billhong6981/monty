@@ -40,12 +40,12 @@ int _atoi(char *s)
  */
 FILE *open_file(char *file_name)
 {
-	FILE *fd1;
+	FILE *fd1 = NULL;
 
 	fd1 = fopen(file_name, "r");
 	if (!fd1)
 	{
-		fprintf(stderr, "Error: Cann't open file %s\n", file_name);
+		fprintf(stderr, "Error: Can't open file %s\n", file_name);
 		exit(EXIT_FAILURE);
 	}
 	return (fd1);

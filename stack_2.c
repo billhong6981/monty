@@ -29,7 +29,7 @@ size_t dlistint_len(stack_t **h)
  * @l: line
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
-char *swap_op(stack_t **h, unsigned int l)
+char *swap_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	size_t i;
 	int temp;
@@ -42,6 +42,7 @@ char *swap_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: can't swap, stack too short\n", l);
 		if (*h)
 			free_dlistint(*h);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	temp = current->n;
@@ -56,7 +57,7 @@ char *swap_op(stack_t **h, unsigned int l)
  * @l: line
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
-char *add_op(stack_t **h, unsigned int l)
+char *add_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	size_t i;
 	stack_t *current;
@@ -68,6 +69,7 @@ char *add_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: can't swap, stack too short\n", l);
 		if (*h)
 			free_dlistint(*h);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	current->next->n += current->n;
@@ -106,8 +108,9 @@ void free_dlistint(stack_t *head)
  * @l: line
  * Return: always return NULL
  */
-char *nop_op(__attribute__((unused))stack_t **h, unsigned int l)
+char *nop_op(__attribute__((unused))stack_t **h, unsigned int l, FILE *fd)
 {
 	(void)l;
+	(void)fd;
 	return (NULL);
 }

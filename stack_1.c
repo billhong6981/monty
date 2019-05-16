@@ -7,7 +7,7 @@
  * Return: return new node address on success, NULL if fail
  */
 
-stack_t *add_dnodeint(stack_t **head, int n)
+stack_t *add_dnodeint(stack_t **head, int n, FILE *fd)
 {
 	stack_t *new;
 
@@ -15,6 +15,7 @@ stack_t *add_dnodeint(stack_t **head, int n)
 	if (!new)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		fclose(fd);
 		if (*head)
 			free_dlistint(*head);
 		exit(EXIT_FAILURE);
@@ -35,20 +36,23 @@ stack_t *add_dnodeint(stack_t **head, int n)
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
 
-char *push_op(stack_t **h, unsigned int l)
+char *push_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	char *token;
-	int i, j;
+	int i, j = 0;
 
 	strtok(global_line, " ");
 	token = strtok(NULL, " ");
 	if (!token)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", l);
+		fclose(fd);
 		if (*h)
 			free_dlistint(*h);
 		exit(EXIT_FAILURE);
 	}
+	if (*token == '-')
+		j++;
 	while (token[j] != '\0')
 	{
 		if (token[j] < '0' || token[j] > '9')
@@ -56,12 +60,13 @@ char *push_op(stack_t **h, unsigned int l)
 			fprintf(stderr, "L%d: usage: push integer\n", l);
 			if (*h)
 				free_dlistint(*h);
+			fclose(fd);
 			exit(EXIT_FAILURE);
 		}
 		j++;
 	}
 	i = _atoi(token);
-	add_dnodeint(h, i);
+	add_dnodeint(h, i, fd);
 	return (NULL);
 }
 
@@ -71,9 +76,10 @@ char *push_op(stack_t **h, unsigned int l)
  * @l: line
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
-char *pall_op(stack_t **h, __attribute__((unused)) unsigned int l)
+char *pall_op(stack_t **h, __attribute__((unused)) unsigned int l, FILE *fd)
 {
 	stack_t *current;
+	(void)fd;
 
 	current = *h;
 	if (current == NULL)
@@ -92,7 +98,7 @@ char *pall_op(stack_t **h, __attribute__((unused)) unsigned int l)
  * @l: line
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
-char *pint_op(stack_t **h, unsigned int l)
+char *pint_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	stack_t *current;
 
@@ -102,6 +108,7 @@ char *pint_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: can't pint, stack empty\n", l);
 		if (*h)
 			free_dlistint(*h);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	fprintf(stdout, "%d\n", current->n);
@@ -114,7 +121,7 @@ char *pint_op(stack_t **h, unsigned int l)
  * @l: line
  * Return: return NULL on success, EXIT_FAILURE on fail
  */
-char *pop_op(stack_t **h, unsigned int l)
+char *pop_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	stack_t *current;
 
@@ -124,6 +131,7 @@ char *pop_op(stack_t **h, unsigned int l)
 		fprintf(stderr, "L%d: can't pint, stack empty\n", l);
 		if (*h)
 			free_dlistint(*h);
+		fclose(fd);
 		exit(EXIT_FAILURE);
 	}
 	*h = current->next;
