@@ -4,6 +4,7 @@
  * @lineptr: a pointer to the line
  * @n: the length of the string
  * @stream: the file that is being read from
+ * @head: stack
  * Return: *n -1 if lineptr is NULL, or n = i
  */
 ssize_t _get_line(char **lineptr, size_t *n, FILE *stream, stack_t *head)

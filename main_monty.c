@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE: monte file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	fd = open_file(argv[1]);
@@ -42,5 +42,5 @@ int main(int argc, char **argv)
 	if (head)
 		free_dlistint(head);
 	fclose(fd);
-	exit(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
