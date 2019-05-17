@@ -149,11 +149,11 @@ char *pchar_op(stack_t **h, unsigned int l, FILE *fd)
 		exit(EXIT_FAILURE);
 	}
 	c = (*h)->n;
-	if (c == 127 || c <= 31)
+	if (c > 127 || c < 0)
 	{
 		fprintf(stderr, "L%d: can't pchar, value out of range\n", l);
 		fclose(fd);
-		free_dlistint(*h);
+		free_dlistint((*h));
 		exit(EXIT_FAILURE);
 	}
 	fprintf(stdout, "%c\n", c);
