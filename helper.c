@@ -37,6 +37,9 @@ char *(*get_opcode_fn(char *s))(stack_t **, unsigned int, FILE *)
 		{"mul", mul_op},
 		{"mod", mod_op},
 		{"pchar", pchar_op},
+		{"pstr", pstr_op},
+		{"rotl", rotl_op},
+		{"rotr", rotr_op},
 		{NULL, NULL} };
 
 	if (s == NULL)

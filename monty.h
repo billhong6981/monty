@@ -64,5 +64,8 @@ char *div_op(stack_t **h, unsigned int l, FILE *fd);
 char *mul_op(stack_t **h, unsigned int l, FILE *fd);
 char *mod_op(stack_t **h, unsigned int l, FILE *fd);
 char *pchar_op(stack_t **h, unsigned int l, FILE *fd);
+char *pstr_op(stack_t **h, unsigned int l, FILE *fd);
+char *rotl_op(stack_t **h, unsigned int l, FILE *fd);
+char *rotr_op(stack_t **h, unsigned int l, FILE *fd);
 
 #endif /* _MONTY_H */
