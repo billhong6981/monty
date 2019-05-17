@@ -22,8 +22,8 @@ char *sub_op(stack_t **h, unsigned int l, FILE *fd)
 		exit(EXIT_FAILURE);
 	}
 	current->next->n -= current->n;
-	*h = current->next;
-	current->next->prev = NULL;
+	(*h) = current->next;
+	(*h)->prev = NULL;
 	free(current);
 	return (NULL);
 }
@@ -59,8 +59,8 @@ char *div_op(stack_t **h, unsigned int l, FILE *fd)
 		exit(EXIT_FAILURE);
 	}
 	current->next->n /= current->n;
-	*h = current->next;
-	current->next->prev = NULL;
+	(*h) = current->next;
+	(*h)->prev = NULL;
 	free(current);
 	return (NULL);
 }
@@ -88,8 +88,8 @@ char *mul_op(stack_t **h, unsigned int l, FILE *fd)
 		exit(EXIT_FAILURE);
 	}
 	current->next->n *= current->n;
-	*h = current->next;
-	current->next->prev = NULL;
+	(*h) = current->next;
+	(*h)->prev = NULL;
 	free(current);
 	return (NULL);
 }
@@ -125,8 +125,8 @@ char *mod_op(stack_t **h, unsigned int l, FILE *fd)
 		exit(EXIT_FAILURE);
 	}
 	current->next->n %= current->n;
-	*h = current->next;
-	current->next->prev = NULL;
+	(*h) = current->next;
+	(*h)->prev = NULL;
 	free(current);
 	return (NULL);
 }

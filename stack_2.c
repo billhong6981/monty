@@ -75,9 +75,8 @@ char *add_op(stack_t **h, unsigned int l, FILE *fd)
 		exit(EXIT_FAILURE);
 	}
 	current->next->n += current->n;
-	*h = current->next;
-	current->next->prev = NULL;
-	(*h)->next = NULL;
+	(*h) = current->next;
+	(*h)->prev = NULL;
 	free(current);
 	return (NULL);
 }
@@ -107,9 +106,10 @@ void free_dlistint(stack_t *head)
  * @fd: file stream
  * Return: always return NULL
  */
-char *nop_op(__attribute__((unused))stack_t **h, unsigned int l, FILE *fd)
+char *nop_op(stack_t **h, unsigned int l, FILE *fd)
 {
 	(void)l;
 	(void)fd;
+	(void)h;
 	return (NULL);
 }
