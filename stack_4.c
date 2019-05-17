@@ -45,7 +45,7 @@ char *rotl_op(stack_t **h, unsigned int l, FILE *fd)
 	(void)fd;
 
 	tail = current = *h;
-	if (!(*h))
+	if (current == NULL || current->next == NULL)
 		return (NULL);
 	while (tail->next)
 		tail = tail->next;
@@ -66,7 +66,7 @@ char *rotl_op(stack_t **h, unsigned int l, FILE *fd)
  */
 char *rotr_op(stack_t **h, unsigned int l, FILE *fd)
 {
-	stack_t *current, *tail, *next, *prev, *result = NULL;
+	stack_t *current, *next, *prev, *result = NULL;
 	(void)l;
 	(void)fd;
 
@@ -81,14 +81,14 @@ char *rotr_op(stack_t **h, unsigned int l, FILE *fd)
 		current = next;
 	}
 	(*h) = result;
-	tail = result;
+	current = result;
 	result = NULL;
-	while (tail)
+	while (current)
 	{
-		prev = tail->prev;
-		tail->prev = result;
-		result = tail;
-		tail = prev;
+		prev = current->prev;
+		current->prev = result;
+		result = current;
+		current = prev;
 	}
 	return (NULL);
 }
