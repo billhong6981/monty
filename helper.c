@@ -36,6 +36,7 @@ char *(*get_opcode_fn(char *s))(stack_t **, unsigned int, FILE *)
 		{"div", div_op},
 		{"mul", mul_op},
 		{"mod", mod_op},
+		{"pchar", pchar_op},
 		{NULL, NULL} };
 
 	if (s == NULL)
